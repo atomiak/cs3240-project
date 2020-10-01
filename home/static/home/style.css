@@ -1,3 +1,8 @@
 li a {
     color: green;
 }
+
+#welcome {
+    padding: 200px 0;
+    text-align: center;
+}
