@@ -14,3 +14,6 @@ Initialized home page, converted database to Postgres
 
 9/30 - Ben
 Started Google Auth, interactive nav bar
+
+9/30 - Andrew
+added a logout feature and added user name into the interactive nav bar
