@@ -13,12 +13,21 @@
           <a class="nav-link" href="/home">Home</span></a>
         </li>
       </ul>
+    {% if user.is_authenticated %}
+        <span class="navbar-text"> {{user}} </span>
+        
+        <span class="navbar-text">
+        <a class="nav-link" href="{%url 'home:logout'%}" >Log Out</span></a>
+        </span>
+
+    {% else %}
       <span class="navbar-text">
         <a class="nav-link" href="/accounts/login" >Login</span></a>
       </span>
       <span class="navbar-text">
         <a class="nav-link" href="/accounts/signup" >Signup</span></a>
       </span>
+    {% endif %}
     </div>
   </nav>
 </div>
