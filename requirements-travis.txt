@@ -2,3 +2,4 @@ Django
 gunicorn
 django-heroku
 bootstrap4==0.1.0
+django-allauth==0.42.0
