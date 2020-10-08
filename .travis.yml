@@ -1,0 +1,14 @@
+language: python
+python:
+- '3.8'
+install:
+- pip install -r requirements-travis.txt
+script:
+- python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: bK/bsotDITLWSfroHYb0Cs/G0JSj3j67wdDum5Y6AKx8dx6Rza+CUBti8IEcP4RPvzm486chMNx58boEj/Kqp8HRq5U+D+s9wjDh0qRIjVr2U/lxuhfZMbLsNNS8O0NuFEujl52VjQjAbd8F17Kbkv+QGIFbf4YFV74r7kp0t5yG4wTUeW1o1UDRC2NCDV68Sjj/RQzC1tW4CFPsi/4wNv21omuE4J7U8rLvuB6AbvoBgR2T9l3CMRq8XRXcQdwb5DhRqMDdlr2isDiHSS6qR/RylkvKkW/CmGC/TAyCczYOV6EkwGf/VsIH26wULsRywGfLjRIRswbddgpOgmbepnAG7mPl2cFeujV7lBhcckit15HMtamB/VaAcmVq2nZIKlKdcDv5RUu3HBmLr7fmDEZHoagFebCZMOAqr9LFq1lEskYzX8/jy+90N5TgfqKzjiRO0QwPuXZOSrNytsevDE28DZr2BcYh8Vhauo0CGY6E9lwbJam0sdwNYNSbGdBUgqIR0751By89T1sHR5UYqpOY0c8gfAhe4uc4pZTaApsqGM0Q9hNjBk01z3qlk8RSujukIHO5VFZF+LB+JMGsxHDiEvzNTUJzAayIX1vhB2Iif5wIOojoHDSU2DE2WI2e1CmZQobYWWGznAmWjAbqnRdDrvBa04W8qLERg9X9JiQ=
+  app: meetup-finder-2-12
+  on:
+    repo: uva-cs3240-f20/project-2-12
