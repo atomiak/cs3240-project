@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'home.apps.HomeConfig',
+    'events.apps.EventsConfig',
 
     # authentication required apps
     'django.contrib.sites',

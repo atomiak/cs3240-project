@@ -12,9 +12,12 @@
         <li class="nav-item active">
           <a class="nav-link" href="/home">Home</span></a>
         </li>
+        <li class="navbar-text">
+          <a class="nav-link" href="/events" >See Events</span></a>
+        </li>
       </ul>
     {% if user.is_authenticated %}
-        <span class="navbar-text"> {{user}} </span>
+        <span class="navbar-text"> {{user.username}} </span>
         
         <span class="navbar-text">
         <a class="nav-link" href="{%url 'home:logout'%}" >Log Out</span></a>
@@ -22,7 +25,7 @@
 
     {% else %}
       <span class="navbar-text">
-        <a class="nav-link" href="/accounts/login" >Login</span></a>
+        <a class="nav-link" href="/accounts/google/login?process=login" >Login</span></a>
       </span>
       <span class="navbar-text">
         <a class="nav-link" href="/accounts/signup" >Signup</span></a>
