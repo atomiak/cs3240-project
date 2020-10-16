@@ -22,6 +22,7 @@ class EventsView(generic.ListView):
 
         args = {'form': form, 'posts': posts}
         return render(request, self.template_name, args)
+        
     def post(self, request):
         form = EventForm(request.POST)
         if form.is_valid():
