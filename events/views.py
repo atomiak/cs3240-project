@@ -10,8 +10,8 @@ from .models import EventFiller
 class EventsView(generic.ListView):
     template_name = 'events/index.html'
 
-    def get_queryset(self):
-        return EventFiller.objects
+    # def get_queryset(self):
+    #     return EventFiller.objects
 
     
    # def get_queryset(self):
@@ -25,6 +25,7 @@ class EventsView(generic.ListView):
         
     def post(self, request):
         form = EventForm(request.POST)
+        posts = Post.objects.all()
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
@@ -32,7 +33,8 @@ class EventsView(generic.ListView):
             form = EventForm()
             #after submitting, should redirect to the page with the list of all events, currently not working, user can manually reenter the url at the address bar to make it show up
             #return redirect('events: index') 
-        args = {'form': form}
+        
+        args = {'form': form, 'posts': posts}
         return render(request, self.template_name, args)
 
         
