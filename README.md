@@ -14,3 +14,12 @@ Initialized home page, converted database to Postgres
 
 9/30 - Ben
 Started Google Auth, interactive nav bar
+
+9/30 - Andrew
+Added a logout feature and added user name into the interactive nav bar
+
+10/9 - Randy
+Updated with Travis-CI
+
+10/15 - Ben
+Created event page, began event model

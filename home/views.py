@@ -12,6 +12,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Filler.objects
 
+
 def pagelogout(request):
     logout(request)
     return redirect('home:index')
