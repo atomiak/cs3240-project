@@ -29,11 +29,10 @@ class EventsView(generic.ListView):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            text = form.cleaned_data['post']
             form = EventForm()
             #after submitting, should redirect to the page with the list of all events, currently not working, user can manually reenter the url at the address bar to make it show up
             #return redirect('events: index') 
-        args = {'form': form, 'text': text}
+        args = {'form': form}
         return render(request, self.template_name, args)
 
         

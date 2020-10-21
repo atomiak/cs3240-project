@@ -12,9 +12,9 @@
                 {{ form.as_p}}
                 <button type="submit"> Submit </button>
         </form>
-        <h2> {{ text }}</h2>
         {% for post in posts %}
-                <h1>{{ post.post }}</h1>
+                <h1>{{ post.name }}</h1>
+                <p>{{ post.description }}</p>
                 <p> Posted by {{ post.user.get_full_name }} </p>
                 <p> Date {{ post.date }} </p>
         {% endfor %}

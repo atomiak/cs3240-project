@@ -9,7 +9,8 @@ class EventFiller(models.Model):
     date = models.DateTimeField('date')
 
 class Post(models.Model):
-    post = models.CharField(max_length=500)
+    name = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
     user = models.ForeignKey(User, on_delete = models.DO_NOTHING)
     date = models.DateTimeField(verbose_name = "Date of creation", default=timezone.now, null=False)
 
