@@ -6,5 +6,5 @@ class EventForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('post', 'date', 'date_of', 'event_description',)
+        fields = ('post',)
 
