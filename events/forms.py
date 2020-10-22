@@ -5,5 +5,5 @@ class EventForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('name', 'description',)
+        fields = ('name', 'description', 'category', 'xcoordinate', 'ycoordinate',)
 
