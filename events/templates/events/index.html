@@ -3,7 +3,7 @@
 {% load static %}
 
     
-
+<p><a href="/home/">Return to Home Page</a></p>
 <div id="welcome">Create an event</div>
 
 <div class ="container">
@@ -13,12 +13,14 @@
                 <button type="submit"> Submit </button>
         </form>
         {% for post in posts reversed %}
-                <h1> {{ post.name }}</h1>
-                <h4> Category: {{ post.category }}</h2>
+                <!--<h1> {{ post.name }}</h1>-->
+                <h1> <a href="/events/{{post.id}}/">{{post.name}}</a></h1>
+                <h2> Category: {{ post.category }}</h2>
                 <p> {{ post.description }}</p>
                 <p> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
                 <p> Posted by {{ post.user.get_full_name }} </p>
                 <p> Date {{ post.date }} </p>
         {% endfor %}
+
 </div>
 
