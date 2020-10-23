@@ -9,12 +9,8 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/home">Home</span></a>
-        </li>
-        <li class="navbar-text">
-          <a class="nav-link" href="/events" >See Events</span></a>
-        </li>
+          <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
+          <li class="navbar-item active"><a class="nav-link" href="/events">See Events</a></li> 
       </ul>
     {% if user.is_authenticated %}
         <span class="navbar-text"> {{user.username}} </span>
