@@ -12,10 +12,13 @@
                 {{ form.as_p}}
                 <button type="submit"> Submit </button>
         </form>
-        <h2> {{ text }}</h2>
-        {% for post in posts %}
-                <h1>{{ post.post }}</h1>
-                <p> Posted by {{ post.user.get_full_name }}
+        {% for post in posts reversed %}
+                <h1> {{ post.name }}</h1>
+                <h4> Category: {{ post.category }}</h2>
+                <p> {{ post.description }}</p>
+                <p> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
+                <p> Posted by {{ post.user.get_full_name }} </p>
+                <p> Date {{ post.date }} </p>
         {% endfor %}
 </div>
 
