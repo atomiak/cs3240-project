@@ -13,7 +13,7 @@
           <li class="navbar-item active"><a class="nav-link" href="/events">See Events</a></li> 
       </ul>
     {% if user.is_authenticated %}
-        <span class="navbar-text"> {{user.username}} </span>
+        <span class="navbar-text"> {{user.username |capfirst }} </span>
         
         <span class="navbar-text">
         <a class="nav-link" href="{%url 'home:logout'%}" >Log Out</span></a>
