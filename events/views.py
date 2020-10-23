@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from events.forms import EventForm
 from events.models import Post
+from django.http import HttpResponseRedirect
+from django.views.generic import CreateView
 
 # Create your views here.
 from django.views import generic
-from .models import EventFiller
+from .models import EventFiller, Post
 
 class EventsView(generic.ListView):
     template_name = 'events/index.html'
@@ -37,4 +39,9 @@ class EventsView(generic.ListView):
         args = {'form': form, 'posts': posts}
         return render(request, self.template_name, args)
 
-        
+class DetailView(generic.DetailView):
+    model = Post
+    template_name = 'events/detail.html'
+    def get_queryset(self):
+        return Post.objects.all()
+    

@@ -7,7 +7,7 @@ from django.utils import timezone
 
 class EventFiller(models.Model):
     date = models.DateTimeField('date')
-
+#post is an event
 class Post(models.Model):
     name = models.CharField(max_length=500)
     description = models.CharField(max_length=500)
