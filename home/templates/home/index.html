@@ -3,36 +3,6 @@
 {% load static %}
 <div class="basic">
   {% include "home/header.html" %}    
-  </div>
-  <!--
-<link rel="stylesheet" href="/static/home/style.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <a class="navbar-brand">2-12: Meetup Finder</a>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
-          <li class="navbar-item active"><a class="nav-link" href="/events">See Events</a></li> 
-      </ul>
-    {% if user.is_authenticated %}
-        <span class="navbar-text"> {{user.username |capfirst }} </span>
-        
-        <span class="navbar-text">
-        <a class="nav-link" href="{%url 'home:logout'%}" >Log Out</span></a>
-        </span>
-
-    {% else %}
-      <span class="navbar-text">
-        <a class="nav-link" href="/accounts/google/login?process=login" >Login</span></a>
-      </span>
-      <span class="navbar-text">
-        <a class="nav-link" href="/accounts/signup" >Signup</span></a>
-      </span>
-    {% endif %}
-    </div>
-  </nav>
 </div>
--->
+  
 <div id="welcome">Welcome to A.G.I.L.E Meet Up Finder!</div>
