@@ -21,7 +21,9 @@ class EventsView(generic.ListView):
     def get(self, request):
         form = EventForm()
         posts = Post.objects.all()
-
+        query = request.GET.get("q")  #for searching
+        if query:
+            posts = posts.filter(name__icontains=query)
         args = {'form': form, 'posts': posts}
         return render(request, self.template_name, args)
         
@@ -33,8 +35,6 @@ class EventsView(generic.ListView):
             post.user = request.user
             post.save()
             form = EventForm()
-            #after submitting, should redirect to the page with the list of all events, currently not working, user can manually reenter the url at the address bar to make it show up
-            #return redirect('events: index') 
         
         args = {'form': form, 'posts': posts}
         return render(request, self.template_name, args)
