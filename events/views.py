@@ -11,11 +11,11 @@ from .models import EventFiller, Post
 
 class EventsView(generic.ListView):
     template_name = 'events/index.html'
-    
+
     def get(self, request):
         form = EventForm()
         posts = Post.objects.all()
-        query = request.GET.get("q")  #for searching
+        query = request.GET.get("search_query")  #for searching
         if query:
             posts = posts.filter(name__icontains=query)
         args = {'form': form, 'posts': posts}
