@@ -11,13 +11,7 @@ from .models import EventFiller, Post
 
 class EventsView(generic.ListView):
     template_name = 'events/index.html'
-
-    # def get_queryset(self):
-    #     return EventFiller.objects
-
     
-   # def get_queryset(self):
-   #     return Filler.objects
     def get(self, request):
         form = EventForm()
         posts = Post.objects.all()

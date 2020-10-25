@@ -10,7 +10,7 @@ class EventFiller(models.Model):
 #post is an event
 class Post(models.Model):
     name = models.CharField(max_length=500)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=500)
     # different categories- this code might be not as efficient as possible but it works
     party = 'Party'
     study = 'Study Session'

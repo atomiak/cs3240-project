@@ -8,12 +8,11 @@
 <body>
         
         {% load static %}
-
         <div class="basic">
                 {% include "home/header.html" %}    
         </div>
 
-<<<<<<< HEAD
+        {% load crispy_forms_tags %}
         <div class="container">
                 <p><a href="/home/">Return to Home Page</a></p>
                 <form method='GET' action=''>
@@ -21,26 +20,31 @@
                         <input type = 'submit' value = 'Search' />
                 </form>
                 <h1 class="welcome">Create an event</h1>
-
-                <div class ="container">
-                        <form method ="post">
-                                {% csrf_token %}
-                                {{ form.as_p}}
-                                <button type="submit"> Submit </button>
-                        </form>
+                
+                <form method ="post">
+                        {% csrf_token %}
+                        {{ form|crispy}}
+                        <button type="submit"> Submit </button>
+                </form>
+                
+                        <div class="row">
                         {% for post in posts reversed %}
-                                <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                        <h5 class="card-title">{{post.name}}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">Category: {{ post.category }}</h6>
-                                        <p class="card-text">{{ post.description }}</p>
-                                        <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
-                                        <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
-                                        <p class="card-text"> Date {{ post.date }} </p>
-                                        <a href="/events/{{post.id}}" class="btn btn-primary">Details</a>
+                            {% if forloop.counter0|divisibleby:3 %}
+                                </div><br><div class="row">
+                            {% endif %}
+                                <div class="col-4">
+                                        <div class="card">
+                                                <div class="card-body">
+                                                <h5 class="card-title">{{post.name}}</h5>
+                                                <h6 class="card-subtitle mb-2 text-muted">Category: {{ post.category }}</h6>
+                                                <p class="card-text">{{ post.description }}</p>
+                                                <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
+                                                <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
+                                                <p class="card-text"> Date {{ post.date }} </p>
+                                                <a href="/events/{{post.id}}" class="btn btn-primary">Details</a>
+                                                </div>
                                         </div>
                                 </div>
-                                
                         {% endfor %}
 
                 </div>
