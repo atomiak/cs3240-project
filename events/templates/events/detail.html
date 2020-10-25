@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!--<title></title>-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ post.name }}</title>
 </head>
     <body>
-        <h1>{{ post.post_name}}</h1>
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <div class="container">
+            <div class="basic">
+            {% include "home/header.html" %}    
+            </div>
+            
+            <h1>{{ post.post_name}}</h1>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-        <ul>
-                <h2> {{ post.name }}</h2>
-                <h3> Category: {{ post.category }}</h3>
-                <p> {{ post.description }}</p>
-                <p> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
-                <p> Posted by {{ post.user.get_full_name }} </p>
-                <p> Date {{ post.date }} </p>
-                <p><a href="/events/">Return Back to Events</a></p>
-        </ul>
+            <ul>
+                    <h2> {{ post.name }}</h2>
+                    <h3> Category: {{ post.category }}</h3>
+                    <p> {{ post.description }}</p>
+                    <p> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
+                    <p> Posted by {{ post.user.get_full_name }} </p>
+                    <p> Date {{ post.date }} </p>
+                    <p><a href="/events">Return Back to Events</a></p>
+            </ul>
+        </div>
     </body>
 </html>
