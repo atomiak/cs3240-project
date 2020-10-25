@@ -4,8 +4,12 @@
 
     
 <p><a href="/home/">Return to Home Page</a></p>
+<form method='GET' action=''>
+	<input type='text' name = 'q' placeholder = 'Search events' />
+	<input type = 'submit' value = 'Search' />
+</form>
+<br>
 <div id="welcome">Create an event</div>
-
 <div class ="container">
         <form method ="post">
                 {% csrf_token %}
