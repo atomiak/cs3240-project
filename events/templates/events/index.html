@@ -19,14 +19,21 @@
                         <input type='text' name = 'search_query' placeholder = 'Search events' />
                         <input type = 'submit' value = 'Search' />
                 </form>
-                <h1 class="welcome">Create an event</h1>
+                <br>
                 
+                {% if user.is_authenticated %}
+                <h1 class="welcome">Create an event</h1>
                 <form method ="post">
                         {% csrf_token %}
                         {{ form|crispy}}
                         <button type="submit"> Submit </button>
                 </form>
-                
+                <br>
+                {% else %}
+                <br><p style="color: red">Please <a href="/accounts/google/login?process=login">log in</a> to make an event. You can still view events without being logged in.</p>
+
+                {% endif %}
+                <h1 class="welcome">Events</h1>
                         <div class="row">
                         {% for post in posts reversed %}
                             {% if forloop.counter0|divisibleby:3 %}

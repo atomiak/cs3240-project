@@ -22,13 +22,14 @@ class EventsView(generic.ListView):
         return render(request, self.template_name, args)
         
     def post(self, request):
-        form = EventForm(request.POST)
-        posts = Post.objects.all()
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.save()
-            form = EventForm()
+        if user.is_authenticated:
+            form = EventForm(request.POST)
+            posts = Post.objects.all()
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = request.user
+                post.save()
+                form = EventForm()
         
         args = {'form': form, 'posts': posts}
         return render(request, self.template_name, args)
