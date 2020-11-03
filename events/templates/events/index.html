@@ -55,7 +55,7 @@
                                                 <form action="/events/{{post.id}}/" method="POST">
                                                         {% csrf_token %}
                                                                 <a href="/events/{{post.id}}/" class="btn btn-primary">Details</a>
-                                                        {% if user.is_authenticated and user is not post.user and user not in post.attendees.all%}
+                                                        {% if user.is_authenticated and user != post.user and user not in post.attendees.all%}
                                                                 <button class="btn btn-warning" type="submit">Mark as Going</button>
                                                         {% endif %}
                                                         {% if user in post.attendees.all %}
