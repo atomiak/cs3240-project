@@ -49,5 +49,6 @@ class DetailView(generic.DetailView):
             post.attendees.add(request.user)
             # add to user's list of events
             request.user.past_events.add(post)
+            
         return redirect(reverse('events:events'))
     
