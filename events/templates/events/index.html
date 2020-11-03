@@ -30,14 +30,16 @@
                 </form>
                 <br>
                 {% else %}
-                <br><p style="color: red">Please <a href="/accounts/google/login?process=login">log in</a> to make an event. You can still view events without being logged in.</p>
+                <br>
+                <p style="color: red">Please <a href="/accounts/google/login?process=login">log in</a> to make an event. You can still view events without being logged in.</p>
 
                 {% endif %}
                 <h1 class="welcome">Events</h1>
                         <div class="row">
                         {% for post in posts reversed %}
                             {% if forloop.counter0|divisibleby:3 %}
-                                </div><br><div class="row">
+                                </div><br>
+                                <div class="row">
                             {% endif %}
                                 <div class="col-4">
                                         <div class="card">
@@ -48,13 +50,25 @@
                                                 <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
                                                 <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
                                                 <p class="card-text"> Date {{ post.date }} </p>
-                                                <a href="/events/{{post.id}}" class="btn btn-primary">Details</a>
+                                                
+                                                <!-- Put these in the same line so they appear in-line on the web app -->
+                                                <form action="/events/{{post.id}}/" method="POST">
+                                                        {% csrf_token %}
+                                                                <a href="/events/{{post.id}}/" class="btn btn-primary">Details</a>
+                                                        {% if user.is_authenticated and user is not post.user and user not in post.attendees.all%}
+                                                                <button class="btn btn-warning" type="submit">Mark as Going</button>
+                                                        {% endif %}
+                                                        {% if user in post.attendees.all %}
+                                                                <span class="btn btn-success" >RSVPed!</button>
+                                                        {% endif %}
+                                                </form>
                                                 </div>
+                                                
                                         </div>
                                 </div>
                         {% endfor %}
 
-                </div>
+                        </div>
         </div>
 
 </body>

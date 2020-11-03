@@ -9,6 +9,7 @@ from .models import Filler
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from events.forms import EventForm
+from django.contrib.auth.models import User
 from events.models import Post
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
@@ -31,8 +32,11 @@ def pagelogout(request):
 class ProfileView(generic.ListView):
     template_name = 'home/profile.html'
 
-    def get(self, request):
-        form = EventForm()
-        posts = Post.objects.all()
-        args = {posts: posts}
+    def get(self, request, pk):
+        if not request.user.is_authenticated or request.user.id != pk:
+            return redirect('/accounts/google/login?process=login')
+        user = User.objects.get(id=pk)
+        posts = Post.objects.filter(user=user)
+        past_events = user.past_events.all()
+        args = {'posts': posts, 'user' : user, 'past_events' : past_events}
         return render(request, self.template_name, args)

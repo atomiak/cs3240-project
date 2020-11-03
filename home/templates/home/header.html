@@ -20,7 +20,7 @@
           <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/events">See Events</a></li> 
     {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'home:profile' %}">See Your Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="/home/{{user.id}}">Your Profile</a></li>
       </ul>
 
         <span class="navbar-text"> {{user.username |capfirst }} </span>

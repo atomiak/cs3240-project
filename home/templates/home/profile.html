@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile: {{ user.username }}</title>
+    <title>User Profile: {{ user.first_name }} {{ user.last_name }}</title>
 </head>
 <body>
     <div class="basic">
@@ -11,8 +11,79 @@
     </div>
 
     <div class="container">
-        <h1>{{ user.username |capfirst}}</h1>
+        <p><a href="/home">Return to Home Page</a></p>
 
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        
+        <br>
+        <h3>Your Events</h3>
+        {% if posts|length == 0 %}
+        <div class="container">
+            <p>You haven't created any events.</p>
+        </div>
+            
+        {% else %}
+            <div class="row">
+            {% for post in posts reversed %}
+            {% if forloop.counter0|divisibleby:3 %}
+                </div><br>
+                <div class="row">
+            {% endif %}
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                <h5 class="card-title">{{post.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Category: {{ post.category }}</h6>
+                                <p class="card-text">{{ post.description }}</p>
+                                <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
+                                <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
+                                <p class="card-text"> Date {{ post.date }} </p>
+                                <a href="/events/{{post.id}}" class="btn btn-primary">Details</a>
+                                </div>
+                        </div>
+                </div>
+            {% endfor %}
+
+                </div>
+        {% endif %}
+
+        
+
+        <br>
+        <br>
+        <h3>Past Attended Events</h3>
+        <!--
+            Just has a repeat of the above; should probably have something in data where users have list of events attended, or events have list of attendees
+        -->
+        {% if past_events|length == 0 %}
+        <div class="container">
+            <p>You haven't attended or RSVPed to any events.</p>
+        </div>
+        {% else %}
+        <div class="row">
+                {% for post in past_events reversed %}
+                {% if forloop.counter0|divisibleby:3 %}
+                    </div><br>
+                    <div class="row">
+                {% endif %}
+                    <div class="col-4">
+                            <div class="card">
+                                    <div class="card-body">
+                                    <h5 class="card-title">{{post.name}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Category: {{ post.category }}</h6>
+                                    <p class="card-text">{{ post.description }}</p>
+                                    <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
+                                    <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
+                                    <p class="card-text"> Date {{ post.date }} </p>
+                                    <a href="/events/{{post.id}}" class="btn btn-primary">Details</a>
+                                    </div>
+                            </div>
+                    </div>
+                {% endfor %}
+
+                </div>
+            {% endif %}
+            
 
     </div>
 
