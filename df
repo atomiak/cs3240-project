@@ -1,0 +1,59 @@
+[33m5aa75b6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m pycache+migrations
+[33m78061a7[m Merge pull request #10 from uva-cs3240-f20/cleaning
+[33m6dd6a3e[m[33m ([m[1;31morigin/cleaning[m[33m, [m[1;32mcleaning[m[33m)[m requirements.txt
+[33md963000[m search functionality
+[33mf6a2a7c[m bootstrap form
+[33m048fbcb[m integrating pull
+[33mfb6bc56[m Added search functionality for names of events
+[33mf9f751a[m bootstrap
+[33m2ac3ee2[m creating header
+[33m1054de4[m fixing travis thing
+[33m71debe1[m Merge pull request #9 from uva-cs3240-f20/at2az
+[33mfc0c30a[m still fixing stuff
+[33m43cfe86[m still fixing travis ciiiii
+[33m4aaaee8[m fixing the travis ci issues
+[33m74e2e71[m added a gitignore file
+[33mac56b19[m Fixed capitalization of username
+[33m31cb4c9[m added the separate event pages features with more navigational ability
+[33m5f238f5[m added new features
+[33m6b3c8f1[m added three fields (xcoord, ycoord, category). category gives 3 options instead of being an open char field
+[33m48947f7[m got posting event working and "sorting" by time
+[33m7eda339[m added some fields and a questionable default value for event name
+[33m7a9054c[m update fix
+[33m31506b2[m update locally for the new changes
+[33me4b611d[m updated fixed branch
+[33m936efc6[m[33m ([m[1;31morigin/atomiak_feature_event_fields[m[33m)[m got it working on the local side so pushed because might as well
+[33mfccb162[m tried to add fields to the Post model
+[33mf3fb972[m minor fix
+[33m082649a[m minor html fix
+[33m3533216[m Added very simple events page with which user posted it. After submitting, it doesn't redirect to right page, need to manually reenter same url on address bar to view all the events.
+[33m0852937[m event_page
+[33md5c3265[m Update README.md
+[33m1e15057[m Fixing travis
+[33m206ffaa[m testing travis
+[33ma0e1c2a[m fixed all-auth sign-up
+[33m3ac14af[m Merge pull request #4 from uva-cs3240-f20/travis2
+[33ma4417f2[m[33m ([m[1;31morigin/travis2[m[33m)[m testing heroku deploy
+[33macf37bf[m Merge pull request #3 from uva-cs3240-f20/travis
+[33m38a201c[m[33m ([m[1;31morigin/travis[m[33m)[m testig
+[33mb204399[m testing travis
+[33m4af039a[m testing
+[33m7f01bf2[m testing
+[33mb656035[m testing travis
+[33mdc0ddcb[m testing travis
+[33m6531660[m testing travis
+[33m73f8935[m Testing if travis works
+[33mc822759[m Added travis requirements txt and yml file.
+[33mae592a2[m Merge pull request #2 from uva-cs3240-f20/at2az
+[33m5e9c384[m Update README.md
+[33m0b9d329[m[33m ([m[1;31morigin/at2az[m[33m)[m added logout feature and user name on the nav bar
+[33m18a028b[m Update README.md
+[33m07f4bb0[m Merge pull request #1 from uva-cs3240-f20/login
+[33m42f9e41[m[33m ([m[1;31morigin/login[m[33m)[m Added some Google authentication; followed tutorial @https://www.youtube.com/watch?time_continue=76&v=NG48CLLsb1A&feature=emb_logo&ab_channel=JustDjango; added some functionality to nav bar on home page
+[33m45f1acc[m Set up the basic website with a "home" app as a starter point. Configured the database stuff for postrgres. If you haven't already you'll need to download and install it (https://www.enterprisedb.com/downloads/postgres-postgresql-downloads), and then run the admin4 to create the database on your computer I think. Make your password #2AD43240 to match what's in the settings.py file
+[33mc3ffb1c[m fixed Procfile
+[33m442987d[m Merge branch 'master' of https://github.com/uva-cs3240-f20/project-2-12
+[33mb171e74[m configured for Heroku
+[33m1cd9ddf[m Update README.md
+[33m35de28d[m Create README.md
+[33mf9a1a44[m initial django initialization

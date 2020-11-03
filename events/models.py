@@ -25,4 +25,5 @@ class Post(models.Model):
     date = models.DateTimeField(verbose_name = "Date of creation", default=timezone.now, null=False)
     xcoordinate = models.CharField(max_length=500)
     ycoordinate = models.CharField(max_length=500)
+    attendees = models.ManyToManyField(User, related_name='past_events')
 

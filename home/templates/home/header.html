@@ -19,8 +19,10 @@
       <ul class="navbar-nav mr-auto">
           <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/events">See Events</a></li> 
-      </ul>
     {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="/home/{{user.id}}">Your Profile</a></li>
+      </ul>
+
         <span class="navbar-text"> {{user.username |capfirst }} </span>
         
         <span class="navbar-text">
@@ -28,6 +30,7 @@
         </span>
 
     {% else %}
+      </ul>
       <span class="navbar-text">
         <a class="nav-link" href="/accounts/google/login?process=login" >Login</span></a>
       </span>
