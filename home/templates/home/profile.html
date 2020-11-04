@@ -38,7 +38,23 @@
                                 <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
                                 <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
                                 <p class="card-text"> Date {{ post.date }} </p>
-                                <a href="/events/{{post.id}}" class="btn btn-primary">Details</a>
+                                <form action="/events/{{post.id}}/" method="POST">
+                                    {% csrf_token %}
+                                            <a href="/events/{{post.id}}/" class="btn btn-primary">Details</a>
+                                    {% if user.is_authenticated %}
+                                            {% if user != post.user and user not in post.attendees.all %}
+                                                    <button class="btn btn-warning" type="submit">Mark as Going</button>
+                                            {% endif %}
+                                            {% if user == post.user %}
+                                                    <a class='btn btn-info' href="/events/{{post.id}}/edit">
+                                                            Edit Event
+                                                    </a>
+                                            {% endif %}
+                                            {% if user in post.attendees.all %}
+                                                    <span class="btn btn-success" >RSVPed!</button>
+                                            {% endif %}
+                                    {% endif %}
+                                </form>
                                 </div>
                         </div>
                 </div>
