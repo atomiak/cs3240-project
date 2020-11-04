@@ -8,6 +8,8 @@ from django.urls import reverse
 # Create your views here.
 from django.views import generic
 from .models import EventFiller, Post
+from django.contrib.auth.decorators import login_required
+
 
 class EventsView(generic.ListView):
     template_name = 'events/index.html'
@@ -45,10 +47,34 @@ class DetailView(generic.DetailView):
     def post(self, request, pk):
         post = Post.objects.get(id=pk)
         if request.user.is_authenticated:
-            # add to event list of attendees
-            post.attendees.add(request.user)
-            # add to user's list of events
-            request.user.past_events.add(post)
+            if request.user in post.attendees.all():
+                post.attendees.remove(request.user)
+                request.user.past_events.remove(post)
+            else:
+                post.attendees.add(request.user)
+                request.user.past_events.add(post)
             
         return redirect(reverse('events:events'))
+    
+class EditView(generic.DetailView):
+    template_name = 'events/edit.html'
+
+    def get(self, request, pk):
+    
+        post = Post.objects.get(pk=pk)
+        if request.user.is_authenticated and request.user == post.user:
+            form = EventForm(instance=post)
+            args = {'form': form}
+            return render(request, self.template_name, args)
+        return redirect('/accounts/google/login?process=login')
+    
+    def post(self, request, pk):
+        post = Post.objects.get(pk=pk)
+        if request.user.is_authenticated and request.user == post.user:
+            form = EventForm(request.POST, instance=post)
+            if form.is_valid():
+                form.save()
+        else:
+            return redirect('/accounts/google/login?process=login')
+        return redirect(reverse('events:detail', args=[pk]))
     
