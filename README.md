@@ -25,4 +25,4 @@ Updated with Travis-CI
 Created event page, began event model
 
 11/2 - Ben
-Created user profile, RSVP functionality
+Created user profile, RSVP functionality, edit events
