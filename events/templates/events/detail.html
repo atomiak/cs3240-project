@@ -15,10 +15,37 @@
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
             <ul>
-                    <h2> {{ post.name }}</h2>
-                    <h3> Category: {{ post.category }}</h3>
-                    <p> {{ post.description }}</p>
-                    <p> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
+                    <h2> <b> {{ post.name }} </b></h2>
+                    <h3> Category:  {{ post.category }} </h3>
+                    <p> <i>{{ post.description }} </i></p>
+                    <!--<p> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p> -->
+                    <script
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvlkeoncMSwFYtv2h4psA83-MwVFCwLKM&callback=initMap&libraries=&v=weekly"
+                        defer
+                    ></script>
+                    <style type="text/css">
+                    #map {
+                        height: 400px;
+                        width: 100%;
+                    }
+                    </style>
+                    <script>
+                    function initMap() {
+                        let loc = { lat: {{post.xcoordinate}}, lng:{{post.ycoordinate}} };
+                        let map = new google.maps.Map(document.getElementById("map"), {
+                        zoom: 15,
+                        center: loc,
+                        });
+                        // The marker, positioned at Uluru
+                        const marker = new google.maps.Marker({
+                        position: loc,
+                        map: map,
+                        });
+                    }
+                    </script>
+                    <body>
+                        <div id="map"></div>
+                    </body>
                     <p> Posted by {{ post.user.get_full_name }} (Username: {{post.user.username}})</p>
                     <p> Date {{ post.date }} </p>
                     
