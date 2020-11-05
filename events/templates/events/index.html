@@ -23,7 +23,7 @@
                 
                 {% if user.is_authenticated %}
                 <h1 class="welcome">Create an event</h1>
-                <form method ="PUT">
+                <form method ="POST">
                         {% csrf_token %}
                         {{ form|crispy}}
                         <button type="submit"> Submit </button>
