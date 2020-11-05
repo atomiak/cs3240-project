@@ -24,7 +24,7 @@ class EventsView(generic.ListView):
         return render(request, self.template_name, args)
         
     def post(self, request):
-        if user.is_authenticated:
+        if request.user.is_authenticated:
             form = EventForm(request.POST)
             posts = Post.objects.all()
             if form.is_valid():
