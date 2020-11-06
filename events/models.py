@@ -26,4 +26,16 @@ class Post(models.Model):
     xcoordinate = models.CharField(max_length=500)
     ycoordinate = models.CharField(max_length=500)
     attendees = models.ManyToManyField(User, related_name='past_events')
+    def name_to_text(self):
+        return self.name
+    def description_to_text(self):
+        return self.description
+    def category_to_text(self):
+        return self.category
+    def x_to_text(self):
+        return self.xcoordinate
+    def y_to_text(self):
+        return self.ycoordinate
+    def attendees_list(self):
+        return self.attendees
 
