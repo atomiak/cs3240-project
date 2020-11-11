@@ -1,6 +1,10 @@
 language: python
 python:
 - '3.8'
+services:
+- postgresql
+addons:
+  postgresql: "9.4"
 before_script:
 - psql postgres -c "CREATE USER postgres WITH PASSWORD '#2AD43240';"
 - psql postgres -c "CREATE DATABASE postgres WITH OWNER postgres;"
