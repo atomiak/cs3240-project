@@ -37,7 +37,8 @@
                                 <p class="card-text">{{ post.description }}</p>
                                 <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
                                 <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
-                                <p class="card-text"> Date {{ post.date }} </p>
+                                <p class="card-text"> Date posted: {{ post.date }} </p>
+				<p class="card-text"> Event date: {{ post.event_date }} </p>
                                 <form action="/events/{{post.id}}/" method="POST">
                                     {% csrf_token %}
                                             <a href="/events/{{post.id}}/" class="btn btn-primary">Details</a>
