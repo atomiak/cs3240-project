@@ -1,6 +1,11 @@
 language: python
 python:
 - '3.8'
+before_script:
+- psql postgres -c "CREATE USER postgres WITH PASSWORD '#2AD43240';"
+- psql postgres -c "CREATE DATABASE postgres WITH OWNER postgres;"
+- psql postgres -c "ALTER USER postgres SUPERUSER CREATEROLE CREATEDB REPLICATION;"
+- python3 manage.py migrate --noinput
 install:
 - pip install -r requirements-travis.txt
 script:
