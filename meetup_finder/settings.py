@@ -102,17 +102,17 @@ AUTHENTICATION_BACKENDS = [
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER' : 'postgres',
-        'PASSWORD' : '#2AD43240',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER' : 'postgres',
+#         'PASSWORD' : '#2AD43240',
+#         'HOST' : '127.0.0.1',
+#         'PORT' : '5432',
 
-    }
-}
+#     }
+# }
 # }
 # # DATABASES = {
 # #     'default': {
@@ -120,22 +120,22 @@ DATABASES = {
 # #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 # #     }
 # # }
-# # if 'DATABASE_NAME' in os.environ:
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ['DATABASE_NAME'],
-#         'USER': os.environ['DATABASE_USER'],
-#         'PASSWORD': os.environ['DATABASE_PASSWORD'],
-#     }
-# }
-# # else:
-# #     DATABASES = {
-# #         'default': {
-# #             'ENGINE': 'django.db.backends.sqlite3',
-# #             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-# #         }
-# #     }
+if 'DATABASE_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['DATABASE_NAME'],
+            'USER': os.environ['DATABASE_USER'],
+            'PASSWORD': os.environ['DATABASE_PASSWORD'],
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
