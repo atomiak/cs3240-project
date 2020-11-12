@@ -31,7 +31,7 @@
                     </style>
                     <script>
                     function initMap() {
-                        let loc = { lat: {{post.xcoordinate}}, lng:{{post.ycoordinate}} };
+                        let loc = { lat: "{{post.xcoordinate}}", lng:"{{post.ycoordinate}}" };
                         let map = new google.maps.Map(document.getElementById("map"), {
                         zoom: 15,
                         center: loc,
@@ -47,6 +47,7 @@
                         <div id="map"></div>
                     </body>
                     <p> Posted by {{ post.user.get_full_name }} (Username: {{post.user.username}})</p>
+                    <p> Event date: {{ post.event_date }}</p>
                     <p> Date posted: {{ post.date }} </p>
                     
                     <p>
@@ -60,7 +61,6 @@
                                 {% endfor %}
                             {% endif %}
                     </p>
-		    <p> Event date: {{ post.event_date }}</p>
                     <p><a href="/events">Return Back to Events</a></p>
             </ul>
         </div>

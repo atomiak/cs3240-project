@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.views import generic
 from .models import EventFiller, Post
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 class EventsView(generic.ListView):
@@ -19,22 +20,31 @@ class EventsView(generic.ListView):
         posts = Post.objects.all()
         query = request.GET.get("search_query")  #for searching
         if query:
-            posts = posts.filter(name__icontains=query)
+            # find any post that fits query in any category
+            posts = posts.filter(name__icontains=query) | posts.filter(description__icontains=query) | posts.filter(category__icontains=query) | posts.filter(xcoordinate=query) | posts.filter(ycoordinate=query) | posts.filter(event_date__icontains=query)
+        
         args = {'form': form, 'posts': posts}
+        return render(request, self.template_name, args)
+        
+
+class CreateView(generic.ListView):
+    template_name = 'events/create.html'
+
+    def get(self, request):
+        form = EventForm()
+        args = {'form': form}
         return render(request, self.template_name, args)
         
     def post(self, request):
         if request.user.is_authenticated:
             form = EventForm(request.POST)
-            posts = Post.objects.all()
             if form.is_valid():
                 post = form.save(commit=False)
                 post.user = request.user
                 post.save()
-                form = EventForm()
         
-        args = {'form': form, 'posts': posts}
-        return render(request, self.template_name, args)
+        return redirect(reverse('events:events'))
+
 
 class DetailView(generic.DetailView):
     template_name = 'events/detail.html'

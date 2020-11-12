@@ -25,7 +25,7 @@ class Post(models.Model):
     date = models.DateTimeField(verbose_name = "Date of creation", default=timezone.now, null=False)
     xcoordinate = models.CharField(max_length=500)
     ycoordinate = models.CharField(max_length=500)
-    event_date = models.DateField(auto_now=False, auto_now_add=False, null=True)
+    event_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
     attendees = models.ManyToManyField(User, related_name='past_events')
     def name_to_text(self):
         return self.name

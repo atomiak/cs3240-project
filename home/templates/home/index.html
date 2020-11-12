@@ -11,8 +11,26 @@
   <div class="basic">
     {% include "home/header.html" %}    
   </div>
-
-  <div id="welcome">Welcome to A.G.I.L.E Meet Up Finder!</div>
+  <div class="container">
+    {% if user.is_authenticated %}
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Welcome to Meet-Up Finder!</h1>
+      <p class="lead">A web application to set up events for others to attend.</p>
+      <hr class="my-4">
+      <p>Make an event for others, or view events that others have made!</p>
+      <a class="btn btn-primary btn-lg" href="/events/create" role="button">Make An Event</a>
+    </div>
+    
+  
+    {% else %}
+    <div id="welcome">Welcome to A.G.I.L.E Meet Up Finder!</div>
+    <div id="welcome">
+      <p style="color: red"><a href="/accounts/google/login?process=login">Log in</a> to view nearby events.</p>
+    </div>
+    {% endif %}
+  </div>
+  
   
 </body>
 </html>
