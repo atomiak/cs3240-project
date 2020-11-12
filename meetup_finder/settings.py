@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'home.apps.HomeConfig',
     'events.apps.EventsConfig',
-    'django.contrib.sitemaps',
-    'django.contrib.redirects',
 
     # authentication required apps
     'django.contrib.sites',
@@ -66,11 +64,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-
 ]
 
 ROOT_URLCONF = 'meetup_finder.urls'
@@ -175,17 +170,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# SECURITY
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_SSL_HOST = 'www.meetup-finder-2-12.herokuapp.com'
-SECURE_SSL_REDIRECT = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_HSTS_PRELOAD = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
