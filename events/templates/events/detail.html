@@ -31,7 +31,7 @@
                     </style>
                     <script>
                     function initMap() {
-                        let loc = { lat: "{{post.xcoordinate}}", lng:"{{post.ycoordinate}}" };
+                        let loc = { lat: parseInt("{{post.xcoordinate}}"), lng: parseInt("{{post.ycoordinate}}") };
                         let map = new google.maps.Map(document.getElementById("map"), {
                         zoom: 15,
                         center: loc,
