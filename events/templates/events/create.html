@@ -11,11 +11,6 @@
                 {% include "home/header.html" %}    
         </div>
     <div class="container">
-        {% if form.errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
-        {% endif %}
             
         {% load crispy_forms_tags %}
 
