@@ -72,8 +72,8 @@ class EventEditView(TestCase):
             description = "test event 2",
             user = user,
             category = 'Party',
-            xcoordinate = "1",
-            ycoordinate = "-1"
+            longitude = "1",
+            latitude = "-1"
         )
 
     def test_view_url_accessible_by_name(self):
