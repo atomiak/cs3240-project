@@ -87,4 +87,11 @@ class EditView(generic.DetailView):
         else:
             return redirect('/accounts/google/login?process=login')
         return redirect(reverse('events:detail', args=[pk]))
-    
+
+def delete(request, pk):
+    post = Post.objects.get(pk=pk)
+    if request.user.is_authenticated and request.user == post.user:
+        post.delete()
+    else:
+        return redirect('/accounts/google/login?process=login')
+    return redirect('events:events')

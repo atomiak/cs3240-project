@@ -52,6 +52,7 @@
                                                                         <a class='btn btn-info' href="/events/{{post.id}}/edit">
                                                                                 Edit Event
                                                                         </a>
+                                                                        <a class='btn btn-danger' href="/events/{{post.id}}/delete">Delete</a>
                                                                 {% endif %}
                                                                 {% if user in post.attendees.all %}
                                                                         <button class="btn btn-success" type="submit">RSVPed!</button>
