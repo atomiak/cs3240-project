@@ -63,6 +63,28 @@ class EventDetailView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'events/detail.html')
 
+class EventEditView(TestCase):
+    def setUp(self):
+        user = User.objects.create(username = 'testuser02')
+        
+        self.new_event = Post.objects.create(
+            name="Event 2",
+            description = "test event 2",
+            user = user,
+            category = 'Party',
+            xcoordinate = "1",
+            ycoordinate = "-1"
+        )
+
+    def test_view_url_accessible_by_name(self):
+        response = self.client.get(reverse('events:edit', kwargs={'pk':self.new_event.pk}))
+        self.assertEqual(response.status_code, 302) #a valid redirect has code 302
+    
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse('events:edit', kwargs={'pk':self.new_event.pk}))
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed(response, 'events/edit.html')
+
 
 class EventFormTest(TestCase):
     def test_event_form_date_today(self):
