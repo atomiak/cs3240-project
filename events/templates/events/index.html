@@ -19,6 +19,11 @@
                         <input type='text' name = 'search_query' placeholder = 'Search events' />
                         <input type = 'submit' value = 'Search' />
                 </form>
+
+                {% if query %}
+                <a href="/events">Reset search</a>
+                {% endif %}
+
                 <br>
                 
                 
@@ -62,6 +67,10 @@
                                                 </div>
                                                 
                                         </div>
+                                </div> 
+                                {% empty %}
+                                <div class="container">
+                                        <p>No events fit that criteria.</p>
                                 </div>
                         {% endfor %}
 
