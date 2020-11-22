@@ -11,10 +11,24 @@
                 {% include "home/header.html" %}    
         </div>
     <div class="container">
+        {% if form.errors %}
+        {% endif %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
         {% load crispy_forms_tags %}
 
         {% if user.is_authenticated %}
-                <h1 class="welcome">Create an event</h1>
+                <h1 class="welcome">Create an Event</h1>
                 <form method ="POST">
                         {% csrf_token %}
                         {{ form|crispy}}

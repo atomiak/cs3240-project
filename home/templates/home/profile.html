@@ -35,7 +35,7 @@
                                 <h5 class="card-title">{{post.name}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">Category: {{ post.category }}</h6>
                                 <p class="card-text">{{ post.description }}</p>
-                                <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
+                                <p class="card-text"> Location: {{ post.latitude }}, {{ post.longitude }}</p>
                                 <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
 				                <p class="card-text"> Event date: {{ post.event_date }} </p>
                                 <p class="card-text"> Date posted: {{ post.date }} </p>
@@ -61,7 +61,7 @@
 
         <br>
         <br>
-        <h3>Past Attended Events</h3>
+        <h3>RSVPed Events</h3>
         <!--
             Just has a repeat of the above; should probably have something in data where users have list of events attended, or events have list of attendees
         -->
@@ -82,8 +82,9 @@
                                     <h5 class="card-title">{{post.name}}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">Category: {{ post.category }}</h6>
                                     <p class="card-text">{{ post.description }}</p>
-                                    <p class="card-text"> Location: {{ post.xcoordinate }}, {{ post.ycoordinate }}</p>
+                                    <p class="card-text"> Location: {{ post.latitude }}, {{ post.longitude }}</p>
                                     <p class="card-text"> Posted by {{ post.user.get_full_name }} </p>
+                                    <p class="card-text"> Event date: {{ post.event_date }} </p>
                                     <p class="card-text"> Date of event: {{ post.date }} </p>
                                     <a href="/events/{{post.id}}" class="btn btn-primary">Details</a>       
                                     {% if user.is_authenticated and user == post.user%}

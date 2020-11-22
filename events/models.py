@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 import datetime
 from django.utils import timezone
@@ -23,8 +23,8 @@ class Post(models.Model):
     category = models.CharField(max_length=50, choices=category_choices, default=party)
     user = models.ForeignKey(User, on_delete = models.DO_NOTHING)
     date = models.DateTimeField(verbose_name = "Date of creation", default=timezone.now, null=False)
-    xcoordinate = models.CharField(max_length=500)
-    ycoordinate = models.CharField(max_length=500)
+    longitude = models.FloatField(default=0, validators=[MinValueValidator(-180), MaxValueValidator(180)])
+    latitude = models.FloatField(default=0, validators=[MinValueValidator(-90), MaxValueValidator(180)])
     event_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
     attendees = models.ManyToManyField(User, related_name='past_events')
     def name_to_text(self):

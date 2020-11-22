@@ -36,14 +36,17 @@ class CreateView(generic.ListView):
         return render(request, self.template_name, args)
         
     def post(self, request):
+        
         if request.user.is_authenticated:
             form = EventForm(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.user = request.user
                 post.save()
+                return redirect(reverse('events:events'))
+            return render(request, self.template_name, {'form': form})
+        return redirect("/accounts/google/login?process=login")
         
-        return redirect(reverse('events:events'))
 
 
 class DetailView(generic.DetailView):
