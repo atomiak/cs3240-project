@@ -21,7 +21,7 @@ class EventsView(generic.ListView):
         query = request.GET.get("search_query")  #for searching
         if query:
             # find any post that fits query in any category
-            posts = posts.filter(name__icontains=query) | posts.filter(description__icontains=query) | posts.filter(category__icontains=query) | posts.filter(latitude=query) | posts.filter(latitude=query) | posts.filter(event_date__icontains=query)
+            posts = posts.filter(name__icontains=query) | posts.filter(description__icontains=query) | posts.filter(category__icontains=query) | posts.filter(event_date__icontains=query)
         
         args = {'form': form, 'posts': posts, 'query': query}
         return render(request, self.template_name, args)
