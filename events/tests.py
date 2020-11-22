@@ -8,8 +8,8 @@ from events.forms import EventForm
 import datetime
 
 class PostFieldsTest(TestCase):  
-     def create_post(self, name="Test", description="A test event", category='Party', xcoordinate="1", ycoordinate="-1"):
-         return Post.objects.create(name=name, description=description, user = User.objects.create(username='testusr'), category=category, xcoordinate=xcoordinate, ycoordinate=ycoordinate)
+     def create_post(self, name="Test", description="A test event", category='Party', longitude="1", latitude="-1"):
+         return Post.objects.create(name=name, description=description, user = User.objects.create(username='testusr'), category=category, longitude=longitude, latitude=latitude)
     
      def test_post_creation(self):
          p = self.create_post()
@@ -17,8 +17,8 @@ class PostFieldsTest(TestCase):
          self.assertEqual(p.name_to_text(), p.name)
          self.assertEqual(p.description_to_text(), p.description)
          self.assertEqual(p.category_to_text(), p.category)
-         self.assertEqual(p.x_to_text(), p.xcoordinate)
-         self.assertEqual(p.y_to_text(), p.ycoordinate)
+         self.assertEqual(p.x_to_text(), p.longitude)
+         self.assertEqual(p.y_to_text(), p.latitude)
 
 
 class EventCreateView(TestCase):
@@ -46,8 +46,8 @@ class EventDetailView(TestCase):
             description = "test event 1",
             user = user,
             category = 'Party',
-            xcoordinate = "1",
-            ycoordinate = "-1"
+            longitude = "1",
+            latitude = "-1"
             )
     
     def test_view_url_exists_at_desired_location(self):
@@ -94,8 +94,8 @@ class EventFormTest(TestCase):
                 'name':'testname',
                 'description':'testdescription',
                 'category':'Party',
-                'xcoordinate':0,
-                'ycoordinate':0,
+                'longitude':0,
+                'latitude':0,
                 'event_date':date
                 }
             )

@@ -16,8 +16,9 @@
         <h1>Edit Event</h1>
         <span>
             <form method ="post">
-                            {{ form|crispy}}
-                            <button type="submit" class="btn btn-info" style="display: inline-block"> Submit </button>
+                {% csrf_token %}
+                {{ form|crispy}}
+                <button type="submit" class="btn btn-info" style="display: inline-block"> Submit </button>
             </form>
         </span>
     </div>
