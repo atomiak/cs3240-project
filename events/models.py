@@ -34,9 +34,9 @@ class Post(models.Model):
     def category_to_text(self):
         return self.category
     def x_to_text(self):
-        return self.xcoordinate
+        return self.longitude
     def y_to_text(self):
-        return self.ycoordinate
+        return self.latitude
     def attendees_list(self):
         return self.attendees
 
