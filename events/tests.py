@@ -85,14 +85,11 @@ class EventEditView(TestCase):
     def test_view_url_accessible_by_name(self):
         response = self.client.get(reverse('events:edit', kwargs={'pk':self.new_event.pk}))
         self.assertEqual(response.status_code, 302) #a valid redirect has code 302
-<<<<<<< HEAD
-=======
     
     # def test_view_uses_correct_template(self):
     #     response = self.client.get(reverse('events:edit', kwargs={'pk':self.new_event.pk}))
     #     self.assertEqual(response.status_code, 302)
     #     self.assertTemplateUsed(response, 'events/edit.html')
->>>>>>> 6167aa909d6130d91305b1237f1b615bb0a052f0
 
 
 class EventFormTest(TestCase):
