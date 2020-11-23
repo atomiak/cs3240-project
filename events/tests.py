@@ -1,3 +1,22 @@
+"""
+REFERENCES
+Title: Django Documentation Testing Tools
+Author: Django Software Foundation
+Date: Copyright 2005-2020, accessed 10/15/2020
+URL: https://docs.djangoproject.com/en/3.1/topics/testing/tools/
+
+Title: Django Tutorial Part 10: Testing a Django web application
+Author: Mozilla Web Docs
+Date: Copyright 2005-2020, accessed 10/17/2020
+URL: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Testing
+
+Title: RequestFactory documentation
+Author: Kite
+Date: Accessed 11/2/2020
+URL: https://www.kite.com/python/docs/django.test.RequestFactory
+
+"""
+
 from django.test import TestCase
 
 # Create your tests here.
