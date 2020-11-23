@@ -6,6 +6,12 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from events.forms import EventForm
 import datetime
+from django.test import RequestFactory
+from events.views import EditView
+from events.views import CreateView
+from events.views import DetailView
+from django.shortcuts import render, redirect
+import events.views
 
 class PostFieldsTest(TestCase):  
      def create_post(self, name="Test", description="A test event", category='Party', xcoordinate="1", ycoordinate="-1"):
@@ -79,11 +85,6 @@ class EventEditView(TestCase):
     def test_view_url_accessible_by_name(self):
         response = self.client.get(reverse('events:edit', kwargs={'pk':self.new_event.pk}))
         self.assertEqual(response.status_code, 302) #a valid redirect has code 302
-    
-    def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('events:edit', kwargs={'pk':self.new_event.pk}))
-        self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(response, 'events/edit.html')
 
 
 class EventFormTest(TestCase):
@@ -101,3 +102,208 @@ class EventFormTest(TestCase):
             )
         self.assertTrue(form.is_valid())
 
+class RequestsInViewsTest(TestCase):
+    def setUp(self):
+        self.userA = User.objects.create(username='testusrA')
+        self.userB = User.objects.create(username='testusrB')
+        self.event1 = Post.objects.create(
+            name="Fun Event",
+            description = "test event 1",
+            user = self.userA,
+            category = 'Party',
+            xcoordinate = "1",
+            ycoordinate = "-1"
+        )
+        self.event2 = Post.objects.create(
+            name="Fun Event 2",
+            description = "test event 2",
+            user = self.userB,
+            category = 'Athletic Event',
+            xcoordinate = "1",
+            ycoordinate = "-1"
+        )
+
+    
+    def test_valid_event_ownership(self):
+        self.assertEqual(self.userA, self.event1.user)
+        self.assertEqual(self.userB, self.event2.user)
+    
+    def test_invalid_event_ownership(self):
+        self.assertFalse(self.userA == self.event2.user)
+        self.assertFalse(self.userB == self.event1.user)
+
+    def test_edit_post_equal(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        edit_post_request1 = factory.post('/')
+        edit_post_request1.user = self.userA
+
+        edit_post_request2 = factory.post('/')
+        edit_post_request2.user = self.userB
+
+        edit_view = EditView()
+        edit_view = setup_view(edit_view, edit_post_request1)
+
+        self.assertEqual(edit_view.post(edit_post_request1, self.event1.pk).url, redirect(reverse('events:detail', args=[self.event1.pk])).url)
+
+    def test_edit_post_not_equal(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        edit_post_request1 = factory.post('/')
+        edit_post_request1.user = self.userA
+
+        edit_post_request2 = factory.post('/')
+        edit_post_request2.user = self.userB
+
+        edit_view = EditView()
+        edit_view = setup_view(edit_view, edit_post_request1)
+
+        self.assertNotEqual(edit_view.post(edit_post_request1, self.event1.pk).url, redirect(reverse('events:detail', args=[self.event2.pk])).url)
+        self.assertNotEqual(edit_view.post(edit_post_request2, self.event2.pk).url, redirect(reverse('events:detail', args=[self.event1.pk])).url)
+
+    def test_edit_get_equal(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        edit_get_request1 = factory.get('/')
+        edit_get_request1.user = self.userA
+
+        edit_view = EditView()
+        edit_view = setup_view(edit_view, edit_get_request1)
+
+        self.assertEqual(edit_view.get(edit_get_request1, self.event1.pk).status_code, render(edit_get_request1, 'events/edit.html', {'form': EventForm(instance=self.event1)}).status_code)
+
+    def test_create_post_equal(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        create_post_request1 = factory.post('/')
+        create_post_request1.user = self.userA
+
+        create_view = CreateView()
+        create_view = setup_view(create_view, create_post_request1)
+
+        response = create_view.post(create_post_request1)
+
+        self.assertEqual(redirect(reverse('events:events')).url, response.url)
+
+    def test_detail_post_url_equal(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        detail_post_request1 = factory.post('/')
+        detail_post_request1.user = self.userA
+
+        detail_view = DetailView()
+        detail_view = setup_view(detail_view, detail_post_request1)
+
+        response = detail_view.post(detail_post_request1, self.event1.pk)
+
+        self.assertEqual(redirect(reverse('events:events')).url, response.url)
+
+    def test_detail_post_user_added(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        detail_post_request1 = factory.post('/')
+        detail_post_request1.user = self.userB
+
+        detail_view = DetailView()
+        detail_view = setup_view(detail_view, detail_post_request1)
+
+        response = detail_view.post(detail_post_request1, self.event1.pk)
+        self.assertTrue(detail_post_request1.user in self.event1.attendees.all())
+
+    def test_detail_post_user_left(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        detail_post_request1 = factory.post('/')
+        detail_post_request1.user = self.userB
+
+        detail_view = DetailView()
+        detail_view = setup_view(detail_view, detail_post_request1)
+
+        response = detail_view.post(detail_post_request1, self.event1.pk)
+        response2 = detail_view.post(detail_post_request1, self.event1.pk)
+
+        self.assertFalse(detail_post_request1.user in self.event1.attendees.all())
+
+    def test_edit_post_user_not_owner(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        edit_post_request = factory.post('/')
+        edit_post_request.user = self.userB
+
+        edit_view = EditView()
+        edit_view = setup_view(edit_view, edit_post_request)
+
+        response = edit_view.post(edit_post_request, self.event1.pk)
+        self.assertEqual(redirect('/accounts/google/login?process=login').url, response.url)
+
+    def test_edit_get_user_not_owner(self):
+        def setup_view(view, request, *args, **kwargs):
+            view.request = request
+            view.args = args
+            view.kwargs = kwargs
+            return view
+        
+        factory = RequestFactory()
+        edit_get_request = factory.get('/')
+        edit_get_request.user = self.userB
+
+        edit_view = EditView()
+        edit_view = setup_view(edit_view, edit_get_request)
+
+        response = edit_view.get(edit_get_request, self.event1.pk)
+        self.assertEqual(redirect('/accounts/google/login?process=login').url, response.url)
+
+    def test_invalid_delete(self):
+        factory = RequestFactory()
+        delete_request = factory.delete('/')
+        delete_request.user = self.userB
+
+        response = events.views.delete(delete_request, self.event1.pk)
+        self.assertEqual(redirect('/accounts/google/login?process=login').url, response.url)
+    
+    def test_valid_delete(self):
+        factory = RequestFactory()
+        delete_request = factory.delete('/')
+        delete_request.user = self.userA
+        response = events.views.delete(delete_request, self.event1.pk)
+        self.assertEqual(redirect('events:events').url, response.url)
