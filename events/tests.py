@@ -15,6 +15,7 @@ Author: Kite
 Date: Accessed 11/2/2020
 URL: https://www.kite.com/python/docs/django.test.RequestFactory
 
+All packages used under the Django umbrella
 """
 
 from django.test import TestCase
