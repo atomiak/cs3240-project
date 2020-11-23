@@ -21,9 +21,9 @@ class EventsView(generic.ListView):
         query = request.GET.get("search_query")  #for searching
         if query:
             # find any post that fits query in any category
-            posts = posts.filter(name__icontains=query) | posts.filter(description__icontains=query) | posts.filter(category__icontains=query) | posts.filter(xcoordinate=query) | posts.filter(ycoordinate=query) | posts.filter(event_date__icontains=query)
+            posts = posts.filter(name__icontains=query) | posts.filter(description__icontains=query) | posts.filter(category__icontains=query) | posts.filter(event_date__icontains=query)
         
-        args = {'form': form, 'posts': posts}
+        args = {'form': form, 'posts': posts, 'query': query}
         return render(request, self.template_name, args)
         
 
@@ -36,14 +36,17 @@ class CreateView(generic.ListView):
         return render(request, self.template_name, args)
         
     def post(self, request):
+        
         if request.user.is_authenticated:
             form = EventForm(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.user = request.user
                 post.save()
+                return redirect(reverse('events:events'))
+            return render(request, self.template_name, {'form': form})
+        return redirect("/accounts/google/login?process=login")
         
-        return redirect(reverse('events:events'))
 
 
 class DetailView(generic.DetailView):

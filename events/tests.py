@@ -14,8 +14,8 @@ from django.shortcuts import render, redirect
 import events.views
 
 class PostFieldsTest(TestCase):  
-     def create_post(self, name="Test", description="A test event", category='Party', xcoordinate="1", ycoordinate="-1"):
-         return Post.objects.create(name=name, description=description, user = User.objects.create(username='testusr'), category=category, xcoordinate=xcoordinate, ycoordinate=ycoordinate)
+     def create_post(self, name="Test", description="A test event", category='Party', longitude="1", latitude="-1"):
+         return Post.objects.create(name=name, description=description, user = User.objects.create(username='testusr'), category=category, longitude=longitude, latitude=latitude)
     
      def test_post_creation(self):
          p = self.create_post()
@@ -23,8 +23,8 @@ class PostFieldsTest(TestCase):
          self.assertEqual(p.name_to_text(), p.name)
          self.assertEqual(p.description_to_text(), p.description)
          self.assertEqual(p.category_to_text(), p.category)
-         self.assertEqual(p.x_to_text(), p.xcoordinate)
-         self.assertEqual(p.y_to_text(), p.ycoordinate)
+         self.assertEqual(p.x_to_text(), p.longitude)
+         self.assertEqual(p.y_to_text(), p.latitude)
 
 
 class EventCreateView(TestCase):
@@ -52,8 +52,8 @@ class EventDetailView(TestCase):
             description = "test event 1",
             user = user,
             category = 'Party',
-            xcoordinate = "1",
-            ycoordinate = "-1"
+            longitude = "1",
+            latitude = "-1"
             )
     
     def test_view_url_exists_at_desired_location(self):
@@ -78,13 +78,21 @@ class EventEditView(TestCase):
             description = "test event 2",
             user = user,
             category = 'Party',
-            xcoordinate = "1",
-            ycoordinate = "-1"
+            longitude = "1",
+            latitude = "-1"
         )
 
     def test_view_url_accessible_by_name(self):
         response = self.client.get(reverse('events:edit', kwargs={'pk':self.new_event.pk}))
         self.assertEqual(response.status_code, 302) #a valid redirect has code 302
+<<<<<<< HEAD
+=======
+    
+    # def test_view_uses_correct_template(self):
+    #     response = self.client.get(reverse('events:edit', kwargs={'pk':self.new_event.pk}))
+    #     self.assertEqual(response.status_code, 302)
+    #     self.assertTemplateUsed(response, 'events/edit.html')
+>>>>>>> 6167aa909d6130d91305b1237f1b615bb0a052f0
 
 
 class EventFormTest(TestCase):
@@ -95,8 +103,8 @@ class EventFormTest(TestCase):
                 'name':'testname',
                 'description':'testdescription',
                 'category':'Party',
-                'xcoordinate':0,
-                'ycoordinate':0,
+                'longitude':0,
+                'latitude':0,
                 'event_date':date
                 }
             )

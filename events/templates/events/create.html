@@ -11,10 +11,11 @@
                 {% include "home/header.html" %}    
         </div>
     <div class="container">
+            
         {% load crispy_forms_tags %}
 
         {% if user.is_authenticated %}
-                <h1 class="welcome">Create an event</h1>
+                <h1 class="welcome">Create an Event</h1>
                 <form method ="POST">
                         {% csrf_token %}
                         {{ form|crispy}}
