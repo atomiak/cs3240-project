@@ -15,10 +15,16 @@ class Post(models.Model):
     party = 'Party'
     study = 'Study Session'
     sports = 'Athletic Event'
+    politics = 'Political Movement'
+    music = 'Musical Performance'
+    other = 'Other'
     category_choices = [
         (party, party),
         (study, study),
         (sports, sports),
+        (politics, politics),
+        (music, music),
+        (other, other),
     ]
     category = models.CharField(max_length=50, choices=category_choices, default=party)
     user = models.ForeignKey(User, on_delete = models.DO_NOTHING)

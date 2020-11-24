@@ -1,3 +1,11 @@
+
+# REFERENCES
+# Title: Django-allauth
+# Author: Raymond Penners Revision
+# Date: Copyrigh 2017, Accessed 10/5/2020
+# URL: https://django-allauth.readthedocs.io/en/latest/
+# Software License: BSD 3
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
