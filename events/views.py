@@ -1,3 +1,11 @@
+"""
+REFERENCES
+Title: Simple Introduction to Django Forms
+Author: Max Goodridge
+Date: Accessed 10/15/2020
+URL: https://www.youtube.com/watch?v=b8RpVs7bSgo
+"""
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from events.forms import EventForm
