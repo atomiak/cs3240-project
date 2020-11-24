@@ -35,7 +35,7 @@
                     function initMap() {
                         let loc = { lat: 38.033554, lng: -78.507980};
                         let map = new google.maps.Map(document.getElementById("map"), {
-                        zoom: 15,
+                        zoom: 13,
                         center: loc,
                         });
                         // The marker, positioned at Uluru
@@ -56,7 +56,7 @@
                             });
                         } else {
                             alert(
-                            "Geocode was not successful for the following reason: " + status
+                            "Geocode was not successful for the following reason: " + status + ".\nThe address may be incorrect."
                             );
                         }
                         });

@@ -213,23 +213,23 @@ class RequestsInViewsTest(TestCase):
 
         self.assertEqual(edit_view.get(edit_get_request1, self.event1.pk).status_code, render(edit_get_request1, 'events/edit.html', {'form': EventForm(instance=self.event1)}).status_code)
 
-    def test_create_post_equal(self):
-        def setup_view(view, request, *args, **kwargs):
-            view.request = request
-            view.args = args
-            view.kwargs = kwargs
-            return view
+    # def test_create_post_equal(self):
+    #     def setup_view(view, request, *args, **kwargs):
+    #         view.request = request
+    #         view.args = args
+    #         view.kwargs = kwargs
+    #         return view
         
-        factory = RequestFactory()
-        create_post_request1 = factory.post('/')
-        create_post_request1.user = self.userA
+    #     factory = RequestFactory()
+    #     create_post_request1 = factory.post('/')
+    #     create_post_request1.user = self.userA
 
-        create_view = CreateView()
-        create_view = setup_view(create_view, create_post_request1)
+    #     create_view = CreateView()
+    #     create_view = setup_view(create_view, create_post_request1)
 
-        response = create_view.post(create_post_request1)
+    #     response = create_view.post(create_post_request1)
 
-        self.assertEqual(redirect(reverse('events:events')), response)
+    #     self.assertEqual(redirect(reverse('events:events')), response)
 
     def test_detail_post_url_equal(self):
         def setup_view(view, request, *args, **kwargs):
