@@ -18,6 +18,7 @@ The See Events Page is a list of all events that have been created by users so f
 The Create Event Page is a form that allows users to enter information to create an event.
 
 If not logged in, the navbar displays a Login button on the top right, and if logged in, the navbar displays a Logout button. 
+If logged in, a new button on the navbar, Your Profile, appears. Clicking this takes the user to their own account page, where they can see the events they've created as well as the events they have RSVPed to.
 
 Thanks for looking into our app!
 
