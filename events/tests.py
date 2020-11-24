@@ -122,6 +122,7 @@ class EventFormTest(TestCase):
                 'category':'Party',
                 'longitude':0,
                 'latitude':0,
+                'address':'Charlottesville, VA',
                 'event_date':date
                 }
             )
@@ -136,16 +137,16 @@ class RequestsInViewsTest(TestCase):
             description = "test event 1",
             user = self.userA,
             category = 'Party',
-            xcoordinate = "1",
-            ycoordinate = "-1"
+            longitude = "1",
+            latitude = "-1"
         )
         self.event2 = Post.objects.create(
             name="Fun Event 2",
             description = "test event 2",
             user = self.userB,
             category = 'Athletic Event',
-            xcoordinate = "1",
-            ycoordinate = "-1"
+            longitude = "1",
+            latitude = "-1"
         )
 
     
@@ -228,7 +229,7 @@ class RequestsInViewsTest(TestCase):
 
         response = create_view.post(create_post_request1)
 
-        self.assertEqual(redirect(reverse('events:events')).url, response.url)
+        self.assertEqual(redirect(reverse('events:events')), response)
 
     def test_detail_post_url_equal(self):
         def setup_view(view, request, *args, **kwargs):

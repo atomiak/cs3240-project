@@ -30,16 +30,35 @@
                     }
                     </style>
                     <script>
+                    let geocoder;
+                    let address = "{{ post.address }}";
                     function initMap() {
-                        let loc = { lat: parseFloat("{{post.latitude}}"), lng: parseFloat("{{post.longitude}}")};
+                        let loc = { lat: 38.033554, lng: -78.507980};
                         let map = new google.maps.Map(document.getElementById("map"), {
                         zoom: 15,
                         center: loc,
                         });
                         // The marker, positioned at Uluru
-                        const marker = new google.maps.Marker({
-                        position: loc,
-                        map: map,
+                        // const marker = new google.maps.Marker({
+                        // position: loc,
+                        // map: map,
+                        // });
+                        geocoder = new google.maps.Geocoder();
+                        geocodeAddress(geocoder, map);
+                    }
+                    function geocodeAddress(geocoder, map) {
+                        geocoder.geocode({ address: address }, (results, status) => {
+                        if (status === "OK") {
+                            map.setCenter(results[0].geometry.location);
+                            new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                            });
+                        } else {
+                            alert(
+                            "Geocode was not successful for the following reason: " + status
+                            );
+                        }
                         });
                     }
                     </script>

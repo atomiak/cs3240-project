@@ -25,6 +25,7 @@ class Post(models.Model):
     date = models.DateTimeField(verbose_name = "Date of creation", default=timezone.now, null=False)
     longitude = models.FloatField(default=0, validators=[MinValueValidator(-180), MaxValueValidator(180)])
     latitude = models.FloatField(default=0, validators=[MinValueValidator(-90), MaxValueValidator(90)])
+    address = models.CharField(max_length=150, default="Charlottesville, VA")
     event_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
     attendees = models.ManyToManyField(User, related_name='past_events')
     def name_to_text(self):
